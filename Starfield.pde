@@ -7,20 +7,73 @@ void draw()
 {
 	//your code here
 }
-class NormalParticle
+class NormalParticle implements Particle
 {
-	//your code here
+	double X, Y, Angle, Speed;
+	int x, y, angle, speed, myColor;
+	boolean normal = false;
+	boolean grid = false;
+	boolean rays = false;
+	boolean rings = false;
+	NormalParticle()
+	{
+	   X
+	   Y
+	   myColor
+	   Angle
+	   Speed
+	   normal = true;
+	}
+	NormalParticleGrid()  //x and y are integers
+	{
+	   x
+	   y
+	   myColor
+	   Angle
+	   Speed
+	   grid = true;
+	}
+	NormalParticleRays()  //angles are integers
+	{
+	   X
+	   Y
+	   myColor
+	   angle
+	   Speed
+	   rays = true;
+	}
+	NormalParticleRings()  //speeds are integers
+	{
+	   X
+	   Y
+	   myColor
+	   Angle
+	   speed
+	   rings = true;
+	}
+	public void move()
+	{
+	}
+	public void show()
+	{
+	}
 }
 interface Particle
 {
-	//your code here
+	public void move();  //NormalParticle and OddballParticle
+	public void show();  //have these methods
 }
-class OddballParticle //uses an interface
+class OddballParticle implements Particle
 {
-	//your code here
+	public void move()
+	{
+	}
+	public void show()
+	{
+	}
 }
-class JumboParticle //uses inheritance
+class JumboParticle extends NormalParticle
 {
-	//your code here
+	//just change size
 }
 
