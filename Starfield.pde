@@ -1,7 +1,7 @@
-//your code here
+Particle[] stars = new Particle[];
 void setup()
 {
-	//your code here
+	size(600,600);
 }
 void draw()
 {
@@ -10,54 +10,47 @@ void draw()
 class NormalParticle implements Particle
 {
 	double X, Y, Angle, Speed;
-	int x, y, angle, speed, myColor;
-	boolean normal = false;
-	boolean grid = false;
-	boolean rays = false;
-	boolean rings = false;
+	int myColor;
 	NormalParticle()
 	{
-	   X
-	   Y
-	   myColor
-	   Angle
-	   Speed
-	   normal = true;
-	}
-	NormalParticleGrid()  //x and y are integers
-	{
-	   x
-	   y
-	   myColor
-	   Angle
-	   Speed
-	   grid = true;
-	}
-	NormalParticleRays()  //angles are integers
-	{
-	   X
-	   Y
-	   myColor
-	   angle
-	   Speed
-	   rays = true;
-	}
-	NormalParticleRings()  //speeds are integers
-	{
-	   X
-	   Y
-	   myColor
-	   Angle
-	   speed
-	   rings = true;
+	   X = 300;
+	   Y = 300;
+	   myColor = color((int)(Math.random())*256,(int)(Math.random())*256,(int)(Math.random())*256);
+	   Angle = Math.random()*2*Math.PI;
+	   Speed = Math.random()*10;
 	}
 	public void move()
 	{
+	   X = X + Math.cos(Angle)*Speed;
+	   Y = Y + Math.sin(Angle)*Speed;
 	}
 	public void show()
 	{
+	   fill(myColor);
+	   ellipse((float)X,(float)Y,10,10);
 	}
 }
+class NormalParticleGrid extends NormalParticle  //x and y are integers
+{
+	int x = 300;
+	int y = 300;
+	public void move()
+	{
+	   x = x + (int)(Math.cos(Angle)*Speed);
+	   y = y + (int)(Math.sin(Angle)*Speed);
+	}
+	public void show()
+	{
+	   fill(myColor);
+	   rect(x,y,10,10);
+	}
+}
+class NormalParticleRays extends NormalParticle  //angles are integers
+{
+}
+class NormalParticleRings extends NormalParticle  //speeds are integers
+{
+]
 interface Particle
 {
 	public void move();  //NormalParticle and OddballParticle
@@ -72,8 +65,12 @@ class OddballParticle implements Particle
 	{
 	}
 }
-class JumboParticle extends NormalParticle
+class JumboParticle extends NormalParticle  //larger NormalParticle
 {
-	//just change size
+	public void show()
+	{
+	   fill(myColor);
+	   ellipse((float)X,(float)Y,30,30);
+	}
 }
 
