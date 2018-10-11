@@ -42,14 +42,26 @@ class NormalParticleGrid extends NormalParticle  //x and y are integers
 	public void show()
 	{
 	   fill(myColor);
-	   rect(x,y,10,10);
+	   ellipse(x,y,10,10);
 	}
 }
 class NormalParticleRays extends NormalParticle  //angles are integers
 {
+	int angle = (int)(Math.random()*2*Math.PI)
+	public void move()
+	{
+	   X = X + Math.cos(angle)*Speed;
+	   Y = Y + Math.sin(angle)*Speed;
+	}
 }
 class NormalParticleRings extends NormalParticle  //speeds are integers
 {
+	int speed = (int)(Math.random()*10)
+	public void move()
+	{
+	   X = X + Math.cos(Angle)*speed;
+	   Y = Y + Math.sin(Angle)*speed;
+	}
 ]
 interface Particle
 {
@@ -58,11 +70,18 @@ interface Particle
 }
 class OddballParticle implements Particle
 {
-	public void move()
+	double X,Y,angle,radius
+	OddballParticle()
 	{
 	}
-	public void show()
+	public void move()  //circular motion
 	{
+	
+	}
+	public void show()  //rect instead of ellipse
+	{
+	   fill(myColor);
+	   rect((float)X,(float)Y,20,20)
 	}
 }
 class JumboParticle extends NormalParticle  //larger NormalParticle
@@ -71,6 +90,14 @@ class JumboParticle extends NormalParticle  //larger NormalParticle
 	{
 	   fill(myColor);
 	   ellipse((float)X,(float)Y,30,30);
+	}
+}
+class JumboParticleGrid extends NormalParticle
+{
+	public void show()
+	{
+	   fill(myColor);
+	   ellipse(x,y,30,30)
 	}
 }
 
