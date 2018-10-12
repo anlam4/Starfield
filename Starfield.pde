@@ -9,24 +9,39 @@ void setup()
 	{
 	   stars[i] = new NormalParticle();
 	}
+	stars[48] = new JumboParticle();
 	stars[49] = new OddballParticle();
 	for(int i = 0; i < grid.length; i++)
 	{
-	   grid[i] = 
+	   grid[i] = new NormalParticleGrid();
 	}
+	grid[48] = new JumboParticleGrid();
 	grid[49] = new OddballParticle();
 	for(int i = 0; i < rays.length; i++)
 	{
+	   rays[i] = new NormalParticleRays();
 	}
+	rays[48] = new JumboParticleRays();
 	rays[49] = new OddballParticle();
 	for(int i = 0; i < rings.length; i++)
 	{
+	   rings[i] = new NormalParticleRings();
 	}
+	rings[48] = new JumboParticleRings();
 	rings[49] = new OddballParticle();
 }
+int counter = 0;
 void draw()
 {
-	//your code here
+	background(0);
+	if()
+	{
+	}
+	else if()
+	{
+	}
+	else if()
+	{
 }
 class NormalParticle implements Particle
 {
@@ -118,12 +133,28 @@ class JumboParticle extends NormalParticle  //larger NormalParticle
 	   ellipse((float)X,(float)Y,30,30);
 	}
 }
-class JumboParticleGrid extends NormalParticle  //larger NormalParticleGrid
+class JumboParticleGrid extends NormalParticleGrid  //larger NormalParticleGrid
 {
 	public void show()
 	{
 	   fill(myColor);
 	   ellipse(x,y,30,30)
+	}
+}
+class JumboParticleRays extends NormalParticleRays  //larger NormalParticleRays
+{
+	public void show()
+	{
+	   fill(myColor);
+	   ellipse((float)X,(float)Y,30,30);
+	}
+}
+class JumboParticleRings extends NormalParticleRings  //larger NormalParticleRings
+{
+	public void show()
+	{
+	   fill(myColor);
+	   ellipse((float)X,(float)Y,30,30);
 	}
 }
 
