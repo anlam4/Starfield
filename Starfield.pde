@@ -1,7 +1,7 @@
-Particle[] stars = new Particle[50];
-Particle[] grid = new Particle[50];
-Particle[] rays = new Particle[50];
-Particle[] rings = new Particle[50];
+Particle[] stars = new Particle[500];
+Particle[] grid = new Particle[500];
+Particle[] rays = new Particle[500];
+Particle[] rings = new Particle[500];
 void setup()
 {	
 	//four different arrays for four different displays
@@ -12,26 +12,26 @@ void setup()
 	{
 	   stars[i] = new NormalParticle();
 	}
-	stars[48] = new JumboParticle();
-	stars[49] = new OddballParticle();
+	stars[498] = new JumboParticle();
+	stars[499] = new OddballParticle();
 	for(int i = 0; i < grid.length; i++)
 	{
 	   grid[i] = new NormalParticleGrid();
 	}
-	grid[48] = new JumboParticleGrid();
-	grid[49] = new OddballParticle();
+	grid[498] = new JumboParticleGrid();
+	grid[499] = new OddballParticle();
 	for(int i = 0; i < rays.length; i++)
 	{
 	   rays[i] = new NormalParticleRays();
 	}
-	rays[48] = new JumboParticleRays();
-	rays[49] = new OddballParticle();
+	rays[498] = new JumboParticleRays();
+	rays[499] = new OddballParticle();
 	for(int i = 0; i < rings.length; i++)
 	{
 	   rings[i] = new NormalParticleRings();
 	}
-	rings[48] = new JumboParticleRings();
-	rings[49] = new OddballParticle();
+	rings[498] = new JumboParticleRings();
+	rings[499] = new OddballParticle();
 }
 
 int counter = 0;
@@ -45,7 +45,7 @@ void draw()
 	      stars[i].show();
 	      stars[i].move();
 	   }
-	   counter = counter++;
+	   counter = counter + 1;
 	}
 	else if(counter < 400)
 	{
@@ -54,7 +54,7 @@ void draw()
 	      grid[i].show();
 	      grid[i].move();
 	   }
-	   counter = counter++;
+	   counter = counter + 1;
 	}
 	else if(counter < 600)
 	{
@@ -63,7 +63,7 @@ void draw()
 	      rays[i].show();
 	      rays[i].move();
 	   }
-	   counter = counter++;
+	   counter = counter + 1;
 	}
 	else if(counter < 800)
 	{
@@ -72,11 +72,27 @@ void draw()
 	      rings[i].show();
 	      rings[i].move();
 	   }
-	   counter = counter++;
+	   counter = counter + 1;
 	}
-	else  //resets counter to go through displays again
+	else  //resets counter and member variables of objects
 	{
 	   counter = 0;
+	   for(int i = 0; i < stars.length; i++)
+	   {
+	      stars[i].reset();  //instance variables can't be accessed from static method draw()
+	   }
+	   for(int i = 0; i < grid.length; i++)
+	   {
+	      grid[i].reset();
+	   }
+	   for(int i = 0; i < rays.length; i++)
+	   {
+	      rays[i].reset();
+	   }
+	   for(int i = 0; i < rings.length; i++)
+	   {
+	      rings[i].reset();
+	   }
 	}
 }
 class NormalParticle implements Particle
@@ -87,9 +103,9 @@ class NormalParticle implements Particle
 	{
 	   X = 300;
 	   Y = 300;
-	   myColor = color((int)(Math.random())*256,(int)(Math.random())*256,(int)(Math.random())*256);
+	   myColor = color((int)(Math.random()*256),(int)(Math.random()*256),(int)(Math.random()*256));
 	   Angle = Math.random()*2*Math.PI;
-	   Speed = Math.random()*10;
+	   Speed = (Math.random()*5)+1;
 	}
 	public void move()
 	{
@@ -99,7 +115,12 @@ class NormalParticle implements Particle
 	public void show()
 	{
 	   fill(myColor);
-	   ellipse((float)X,(float)Y,10,10);
+	   ellipse((float)X,(float)Y,8,8);
+	}
+	public void reset()
+	{
+	   X = 300;
+	   Y = 300;
 	}
 }
 class NormalParticleGrid extends NormalParticle  //x and y are integers
@@ -114,7 +135,12 @@ class NormalParticleGrid extends NormalParticle  //x and y are integers
 	public void show()
 	{
 	   fill(myColor);
-	   ellipse(x,y,10,10);
+	   ellipse(x,y,8,8);
+	}
+	public void reset()
+	{
+	   x = 300;
+	   y = 300;
 	}
 }
 class NormalParticleRays extends NormalParticle  //angles are integers
@@ -128,37 +154,43 @@ class NormalParticleRays extends NormalParticle  //angles are integers
 }
 class NormalParticleRings extends NormalParticle  //speeds are integers
 {
-	int speed = (int)(Math.random()*10);
+	int speed = (int)(Math.random()*5)+1;
 	public void move()
 	{
 	   X = X + Math.cos(Angle)*speed;
 	   Y = Y + Math.sin(Angle)*speed;
 	}
 }
-interface Particle
+interface Particle  //Normal, Oddball, and JumboParticle have these methods
 {
-	public void move();  //NormalParticle and OddballParticle
-	public void show();  //have these methods
+	public void move();
+	public void show();
+	public void reset();
 }
 class OddballParticle implements Particle
 {
 	double X, Y, angle;
 	OddballParticle()
 	{
-	   X = 300 + 50;  //Math.cos(0)*50 = 50
-	   Y = 300;	  //Math.sin(0)*50 = 0
+	   X = 300 + 100;  //Math.cos(0)*50 = 50
+	   Y = 300;	   //Math.sin(0)*50 = 0
 	   angle = 0;
 	}
-	public void move()  //circular motion, radius of 50
+	public void move()  //circular motion, radius of 100
 	{
 	   angle = angle + (0.01*Math.PI);
-	   X = 300 + Math.cos(angle)*50;
-	   Y = 300 + Math.sin(angle)*50;
+	   X = 300 + Math.cos(angle)*100;
+	   Y = 300 + Math.sin(angle)*100;
 	}
 	public void show()  //rect instead of ellipse
 	{
 	   fill(128,255,255);
 	   rect((float)X,(float)Y,20,20);
+	}
+	public void reset()
+	{
+	   X = 400;
+	   Y = 300;
 	}
 }
 class JumboParticle extends NormalParticle  //larger NormalParticle
@@ -174,7 +206,7 @@ class JumboParticleGrid extends NormalParticleGrid  //larger NormalParticleGrid
 	public void show()
 	{
 	   fill(myColor);
-	   ellipse(x,y,30,30)
+	   ellipse(x,y,30,30);
 	}
 }
 class JumboParticleRays extends NormalParticleRays  //larger NormalParticleRays
