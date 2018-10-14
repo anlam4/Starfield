@@ -3,7 +3,10 @@ Particle[] grid = new Particle[50];
 Particle[] rays = new Particle[50];
 Particle[] rings = new Particle[50];
 void setup()
-{
+{	
+	//four different arrays for four different displays
+	//each has a jumbo and oddball particle
+	//jumbo particles are different to mimic movement of respective normal particles
 	size(600,600);
 	for(int i = 0; i < stars.length; i++)
 	{
@@ -30,18 +33,51 @@ void setup()
 	rings[48] = new JumboParticleRings();
 	rings[49] = new OddballParticle();
 }
+
 int counter = 0;
 void draw()
 {
-	background(0);
-	if()
+	background(0);     //hides previous ellipse and rect
+	if(counter < 200)  //display changes when oddball makes full circle: 2pi/0.01pi = 200
 	{
+	   for(int i = 0; i < stars.length; i++)
+	   {
+	      stars[i].show;
+	      stars[i].move;
+	   }
+	   counter = counter++;
 	}
-	else if()
+	else if(counter < 400)
 	{
+	   for(int i = 0; i < grid.length; i++)
+	   {
+	      grid[i].show;
+	      grid[i].move;
+	   }
+	   counter = counter++;
 	}
-	else if()
+	else if(counter < 600)
 	{
+	   for(int i = 0; i < rays.length; i++)
+	   {
+	      rays[i].show;
+	      rays[i].move;
+	   }
+	   counter = counter++;
+	}
+	else if(counter < 800)
+	{
+	   for(int i = 0; i < rings.length; i++)
+	   {
+	      rings[i].show;
+	      rings[i].move;
+	   }
+	   counter = counter++;
+	}
+	else  //resets counter to go through displays again
+	{
+	   counter = 0;
+	}
 }
 class NormalParticle implements Particle
 {
@@ -109,15 +145,15 @@ class OddballParticle implements Particle
 	double X, Y, angle;
 	OddballParticle()
 	{
-	   X = 300;
-	   Y = 300;
+	   X = 300 + 50;  //Math.cos(0)*50 = 50
+	   Y = 300;	  //Math.sin(0)*50 = 0
 	   angle = 0;
 	}
 	public void move()  //circular motion, radius of 50
 	{
-	   X = Math.cos(angle)*50;
-	   Y = Math.sin(angle)*50;
-	   angle = angle + 0.1;
+	   angle = angle + (0.01*Math.PI);
+	   X = 300 + Math.cos(angle)*50;
+	   Y = 300 + Math.sin(angle)*50;
 	}
 	public void show()  //rect instead of ellipse
 	{
