@@ -42,8 +42,8 @@ void draw()
 	{
 	   for(int i = 0; i < stars.length; i++)
 	   {
-	      stars[i].show;
-	      stars[i].move;
+	      stars[i].show();
+	      stars[i].move();
 	   }
 	   counter = counter++;
 	}
@@ -51,8 +51,8 @@ void draw()
 	{
 	   for(int i = 0; i < grid.length; i++)
 	   {
-	      grid[i].show;
-	      grid[i].move;
+	      grid[i].show();
+	      grid[i].move();
 	   }
 	   counter = counter++;
 	}
@@ -60,8 +60,8 @@ void draw()
 	{
 	   for(int i = 0; i < rays.length; i++)
 	   {
-	      rays[i].show;
-	      rays[i].move;
+	      rays[i].show();
+	      rays[i].move();
 	   }
 	   counter = counter++;
 	}
@@ -69,8 +69,8 @@ void draw()
 	{
 	   for(int i = 0; i < rings.length; i++)
 	   {
-	      rings[i].show;
-	      rings[i].move;
+	      rings[i].show();
+	      rings[i].move();
 	   }
 	   counter = counter++;
 	}
@@ -134,7 +134,7 @@ class NormalParticleRings extends NormalParticle  //speeds are integers
 	   X = X + Math.cos(Angle)*speed;
 	   Y = Y + Math.sin(Angle)*speed;
 	}
-]
+}
 interface Particle
 {
 	public void move();  //NormalParticle and OddballParticle
@@ -157,7 +157,7 @@ class OddballParticle implements Particle
 	}
 	public void show()  //rect instead of ellipse
 	{
-	   fill(myColor);
+	   fill(128,255,255);
 	   rect((float)X,(float)Y,20,20);
 	}
 }
